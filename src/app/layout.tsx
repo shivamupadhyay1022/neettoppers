@@ -1,16 +1,8 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// app/layout.tsx
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import type { Metadata } from "next";
+import { AuthProvider } from "./context/AuthContext";
+import CookieBanner from "./components/CookieBanner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,16 +11,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body className="bg-slate-900 text-white relative">
+          {children}
+          <CookieBanner />
+        </body>
+      </html>
+    </AuthProvider>
   );
 }
