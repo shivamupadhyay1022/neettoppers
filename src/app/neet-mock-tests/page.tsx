@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import Head from 'next/head';
 // import { useRouter } from 'next/router';
 import NavBar from '../components/NavBar';

@@ -1,12 +1,11 @@
-// Import the functions you need from the SDKs you need
+// firebase.jsx
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Only import getAnalytics if on client
+const isBrowser = typeof window !== "undefined";
+let analytics;
+
 const firebaseConfig = {
   apiKey: "AIzaSyAecGyZ9tulhpB6lS0HXbpHdwcoVUtoZrw",
   authDomain: "sci-neettoppers.firebaseapp.com",
@@ -15,10 +14,17 @@ const firebaseConfig = {
   storageBucket: "sci-neettoppers.firebasestorage.app",
   messagingSenderId: "244892523415",
   appId: "1:244892523415:web:62b34df3a68b5158e982d2",
-  measurementId: "G-RSH6Q7W7ES"
+  measurementId: "G-RSH6Q7W7ES",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
- export const auth = getAuth(app);
+
+// Only get analytics if running in the browser
+if (isBrowser) {
+  import("firebase/analytics").then(({ getAnalytics }) => {
+    analytics = getAnalytics(app);
+  });
+}
+
+export const auth = getAuth(app);
+export { app, analytics };

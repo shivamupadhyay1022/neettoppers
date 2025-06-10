@@ -1,4 +1,3 @@
-// app/components/CookieBanner.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -9,8 +8,12 @@ export default function CookieBanner() {
   const [consent, setConsent] = useState(false);
 
   useEffect(() => {
-    if (getCookieConsentValue() === "true") {
-      setConsent(true);
+    // ✅ Safe browser-only call
+    if (typeof window !== "undefined") {
+      const cookieConsent = getCookieConsentValue();
+      if (cookieConsent === "true") {
+        setConsent(true);
+      }
     }
   }, []);
 

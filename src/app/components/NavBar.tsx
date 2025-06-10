@@ -1,6 +1,6 @@
 
 "use client"
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 
@@ -24,7 +24,7 @@ const NavBar = () => {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link href="/practice" className="text-purple-300 hover:text-white transition-colors">
+            <Link href="/neet-practice" className="text-purple-300 hover:text-white transition-colors">
               Practice
             </Link>
             <Link href="/neet-mock-tests" className="text-purple-300 hover:text-white transition-colors">

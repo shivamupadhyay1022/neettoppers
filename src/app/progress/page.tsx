@@ -1,6 +1,6 @@
 "use client";
+import { useState, useEffect } from "react";
 
-import React from "react";
 import NavBar from "../components/NavBar";
 import {
   Chart as ChartJS,
@@ -23,6 +23,8 @@ ChartJS.register(
 );
 
 const Progress = () => {
+  const [loading, setLoading] = useState(true);
+
   const performanceData = [
     { month: "Jan", score: 65 },
     { month: "Feb", score: 72 },
@@ -86,6 +88,26 @@ const Progress = () => {
       },
     },
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000); // 1s delay for demonstration, tweak if needed
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 ">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-purple-500 border-solid mx-auto mb-4"></div>
+        <p className="text-purple-300 mt-4 text-sm tracking-wide">Analyzing your performance...</p>
+      </div>
+    </div>
+  );
+}
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
